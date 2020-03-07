@@ -4,5 +4,3 @@ MAINTAINER brewmasters
 ENV POSTGRES_PASSWORD brewmaster
 
 ADD ./setup_timescaledb.sh /docker-entrypoint-initdb.d/
-
-EXPOSE 5432
