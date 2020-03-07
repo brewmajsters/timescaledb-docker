@@ -1,3 +1,3 @@
 #!/bin/bash
 
-psql -U postgres -c "CREATE DATABASE brewmasters;"
+psql -U postgres -c "CREATE DATABASE brewmaster;"
