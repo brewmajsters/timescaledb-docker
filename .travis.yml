@@ -1,0 +1,17 @@
+---
+
+dist: bionic
+
+services:
+  - docker
+
+before_install:
+  - sudo apt update && sudo apt install -y netcat postgresql-client
+  - docker build -t timescale .
+  - docker run -d --name timescale -p 5432:5432 timescale
+
+script:
+  - nc -zv localhost 5432 ; [[ $? == 0 ]] || exit 1
+  - sleep 3
+  - echo "localhost:5432:brewmaster:postgres:brewmaster" > ~/.pgpass && chmod 600 ~/.pgpass
+  - psql -U postgres -h localhost --no-password brewmaster -c "SELECT datname FROM pg_database" | grep -i brewmaster ; [[ $? == 0 ]] || exit 1
